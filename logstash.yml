@@ -1,0 +1,12 @@
+dead_letter_queue.enable: true
+http.host: 0.0.0.0
+modules:
+- name: netflow
+  var.elasticsearch.hosts: elasticsearch:9200
+  var.elasticsearch.password: ${ELASTIC_PASSWORD}
+  var.input.udp.port: 2056
+  var.kibana.host: kibana:5601
+queue.type: persisted
+xpack.monitoring.elasticsearch.password: ${ELASTIC_PASSWORD}
+xpack.monitoring.elasticsearch.url: http://elasticsearch:9200
+xpack.monitoring.elasticsearch.username: logstash_system
