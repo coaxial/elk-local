@@ -9,6 +9,6 @@ https://www.elastic.co/guide/en/elasticsearch/reference/5.0/vm-max-map-count.htm
 TLDR: `$ sysctl -w vm.max_map_count=262144 # command to execute
 on the Linux docker host`
 
-Copy the example env files and change the variables to what is appropriate.
+Copy the example env files and change the variables to what is appropriate. All variables are mandator.
 
 Run it all with `$ docker-compose up -d && docker-compose logs -f`

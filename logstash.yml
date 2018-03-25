@@ -4,7 +4,7 @@ modules:
 - name: netflow
   var.elasticsearch.hosts: elasticsearch:9200
   var.elasticsearch.password: ${ELASTIC_PASSWORD}
-  var.input.udp.port: 2056
+  var.input.udp.port: ${NETFLOW_UDP_PORT}
   var.kibana.host: kibana:5601
 queue.type: persisted
 xpack.monitoring.elasticsearch.password: ${ELASTIC_PASSWORD}
