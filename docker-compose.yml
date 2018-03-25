@@ -1,0 +1,34 @@
+---
+version: '3'
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.2.3
+    env_file: elasticsearch.env
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+
+  logstash:
+    # image: docker.elastic.co/logstash/logstash:6.2.3
+    build: ./logstash
+    env_file: logstash.env
+    ports:
+      # this is intentional, logstash is running unprivileged
+      # and cannot bind to port 514
+      - "514:5140"
+      - "514:5140/udp"
+      # netflow module
+      - "2056:2056/udp"
+    volumes:
+      - ./logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./pipeline/:/usr/share/logstash/pipeline/:ro
+      - ./pipelines.yml:/usr/share/logstash/config/pipelines.yml:ro
+      - lsdata:/usr/share/logstash/data
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.2.3
+    ports:
+      - "5601:5601"
+
+volumes:
+  esdata:
+  lsdata:
